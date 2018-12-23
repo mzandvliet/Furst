@@ -4,7 +4,6 @@ open UnityEngine;
 open Unity.Jobs;
 open Unity.Collections;
 open Unity.Burst;
-open Unity.Collections
 
 
 type SimpleComponent() = 
@@ -55,7 +54,7 @@ type AddJob =
     member private this.TestFunctionPrivate = 
         Debug.Log("Hello this is test private!");
 
-    //interface IJob with
-    member public this.Execute () =
-        this.X.[0] <- this.X.[0] + this.Y.[0]
+    interface IJob with
+        member this.Execute () =
+            this.X.[0] <- this.X.[0] + this.Y.[0]
     

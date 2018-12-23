@@ -62,6 +62,7 @@
       <Name>FSharp.Core</Name>
       <AssemblyName>FSharp.Core.dll</AssemblyName>
       <HintPath>$(MSBuildProgramFiles32)\Reference Assemblies\Microsoft\FSharp\.NETFramework\v4.0\$(TargetFSharpCoreVersion)\FSharp.Core.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -71,24 +72,31 @@
     </Reference>
     <Reference Include="Unity.Burst">
       <HintPath>..\..\..\Library\ScriptAssemblies\Unity.Burst.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Unity.Collections">
       <HintPath>..\..\..\Library\ScriptAssemblies\Unity.Collections.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Unity.Entities">
       <HintPath>..\..\..\Library\ScriptAssemblies\Unity.Entities.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Unity.Jobs">
       <HintPath>..\..\..\Library\ScriptAssemblies\Unity.Jobs.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Unity.Mathematics">
       <HintPath>..\..\..\Library\ScriptAssemblies\Unity.Mathematics.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2018.3.0f2\Editor\Data\Managed\UnityEngine.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.CoreModule">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2018.3.0f2\Editor\Data\Managed\UnityEngine\UnityEngine.CoreModule.dll</HintPath>
+      <Private>False</Private>
     </Reference>
   </ItemGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

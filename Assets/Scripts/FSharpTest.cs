@@ -11,17 +11,17 @@ public class FSharpTest : MonoBehaviour {
         var b = new NativeArray<float>(count, Allocator.Persistent, NativeArrayOptions.ClearMemory);
 
         for (int i = 0; i < count; i++) {
-            a[i] = i;
-            b[i] = i * 2;
+            a[i] = 0.33333f;
+            b[i] = i;
         }
 
-        // var j = new Furst.AddJob(a, b);
-        // var h = j.Schedule();
-        // h.Complete();
+        var j = new Furst.AddJob(a, b);
+        var h = j.Schedule();
+        h.Complete();
 
-        // for (int i = 0; i < a.Length; i++) {
-        //     Debug.Log(a[i]);
-        // }
+        for (int i = 0; i < a.Length; i++) {
+            Debug.Log(a[i]);
+        }
 
         // var aj = new Furst.AddJob();
         //aj.Execute() // Todo: Where did it go?
