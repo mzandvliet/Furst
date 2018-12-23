@@ -20,7 +20,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <Tailcalls>false</Tailcalls>
-    <OutputPath>E:\code\unity\NeuroParty\Assets\Plugins\f\</OutputPath>
+    <OutputPath>E:\code\unity\Furst\Assets\Plugins\FSharp\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <WarningLevel>3</WarningLevel>
     <DocumentationFile>bin\$(Configuration)\$(AssemblyName).XML</DocumentationFile>
@@ -71,26 +71,24 @@
     </Reference>
     <Reference Include="Unity.Burst">
       <HintPath>..\..\..\Library\ScriptAssemblies\Unity.Burst.dll</HintPath>
-      <Private>False</Private>
     </Reference>
     <Reference Include="Unity.Collections">
       <HintPath>..\..\..\Library\ScriptAssemblies\Unity.Collections.dll</HintPath>
-      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Entities">
+      <HintPath>..\..\..\Library\ScriptAssemblies\Unity.Entities.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Jobs">
       <HintPath>..\..\..\Library\ScriptAssemblies\Unity.Jobs.dll</HintPath>
-      <Private>False</Private>
     </Reference>
     <Reference Include="Unity.Mathematics">
       <HintPath>..\..\..\Library\ScriptAssemblies\Unity.Mathematics.dll</HintPath>
-      <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine">
-      <HintPath>C:\Program Files\Unity\Hub\Editor\2018.2.0f2\Editor\Data\Managed\UnityEngine.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>C:\Program Files\Unity\Hub\Editor\2018.3.0f2\Editor\Data\Managed\UnityEngine.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.CoreModule">
-      <HintPath>C:\Program Files\Unity\Hub\Editor\2018.2.0f2\Editor\Data\Managed\UnityEngine\UnityEngine.CoreModule.dll</HintPath>
+      <HintPath>C:\Program Files\Unity\Hub\Editor\2018.3.0f2\Editor\Data\Managed\UnityEngine\UnityEngine.CoreModule.dll</HintPath>
     </Reference>
   </ItemGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

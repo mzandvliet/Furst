@@ -23,10 +23,10 @@ public class FSharpTest : MonoBehaviour {
         //     Debug.Log(a[i]);
         // }
 
-        var aj = new Furst.AddJob();
+        // var aj = new Furst.AddJob();
         //aj.Execute() // Todo: Where did it go?
 
-        new Furst.MyThing(3).Print();
+        // new Furst.MyThing(3).Print();
 
         a.Dispose();
         b.Dispose();
