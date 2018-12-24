@@ -6,51 +6,79 @@ open Unity.Collections;
 open Unity.Burst;
 open Unity.Mathematics;
 
+(*
+    We can try using the |> pipe operator to compose numerical computation pipelines like Tensorflow.
+    Also, weaving coroutines should be much faster. We finally get lots of ways to clean it up and compose them.
+*)
+
+
 // This is basically the typedef I was looking for in C#
 type Q15_16 =
-    Q15_16 of int32
+    | Q15_16 of int32
+
+    //static let Scale = 16 How? Is this because of single-choice type?
+
+    static member Create(n:int) = 
+        Q15_16(n <<< 16)
+
+    static member Create(n:float32) =
+        Q15_16((int)(n * (float32)(1 <<< 16)))
+
+    //static member ToFloat(n:Q15_16) : float32 =
+        // How?
+
+    static member (+) (a:Q15_16, b:Q15_16) = a + b
+
+    //override x.ToString() =
+        // How?
 
 module MyMath =
     let add(x,y) = x+y
     let addTyped(x:int, y:int) : int = x+y
 
+    let evalAndAdd2 func = func 5 + 2 // evaluates function with 5, then adds 2 to result
+    let evalWith5AsFloat (fn:int->float) = fn 5 // Explicitly type the input function
 
-type SimpleComponent() = 
+    let adderGenerator numberToAdd = (+) numberToAdd
+
+    let inline sqr x = x * x // Inlining is dead-easy
+
+
+type FixedPointTest() = 
     inherit MonoBehaviour()
 
-    [<SerializeField>]
-    let mutable changeSpeed = 2.0f
-        
-    member this.stuff = 42
-    member this.Transform : Transform = null
-
     member this.Awake () =
-        let mutable a = [| 1; 2; 3 |]
-        Debug.Log(a.[0])
-        Array.set a 0 4
-        Debug.Log(a.[0])
+        this.TestIntAdd()
+        this.TestFixedAdd()
+
+    member this.TestIntAdd () =
+        let a = 2
+        let b = 3
+        let mutable c = 0
 
         let watch = System.Diagnostics.Stopwatch.StartNew()
         watch.Start()
 
-        let b = MyMath.add(1,2)
-        Debug.Log(b)
+        for i in 0 .. 9999999 do
+            c <- a + b
 
         watch.Stop()
-        Debug.Log watch.Elapsed
+        sprintf "%i" watch.Elapsed.Ticks |> Debug.Log 
 
-        this.Transform = this.gameObject.GetComponent<Transform>()
+    member this.TestFixedAdd () =
+        // Todo: this function deadlocks the editor for some reason
+        let a = Q15_16.Create 2
+        let b = Q15_16.Create 3
+        let mutable c = Q15_16.Create 0
 
-    member this.Update () =
-        this.Transform.Translate(0.0f, 0.0f, changeSpeed * Time.deltaTime)
+        let watch = System.Diagnostics.Stopwatch.StartNew()
+        watch.Start()
 
+        for i in 0 .. 9999999 do
+            c <- a + b
 
-
-type MyThing(x: int) =
-    let mutable X = x
-
-    member this.print() = 
-        Debug.Log(X);
+        watch.Stop()
+        sprintf "%i" watch.Elapsed.Ticks |> Debug.Log 
 
     
 [<BurstCompile>]
@@ -70,3 +98,14 @@ type AddJob =
             for i in 0 .. this.X.Length-1 do // Hah, for-in-do range is inclusive
                 this.Z.[i] <- this.X.[i] + this.Y.[i]
    
+
+type SimpleComponent() = 
+    inherit MonoBehaviour()
+
+    [<SerializeField>]
+    let mutable changeSpeed = 2.0f
+        
+    member this.Transform : Transform = null
+
+    member this.Update () =
+        this.Transform.Translate(0.0f, 0.0f, changeSpeed * Time.deltaTime)
