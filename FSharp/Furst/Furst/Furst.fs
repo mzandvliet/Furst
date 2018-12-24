@@ -42,19 +42,15 @@ type AddJob =
     struct
         val mutable X : NativeArray<float32>
         val mutable Y : NativeArray<float32>
+        val mutable Z : NativeArray<float32>
 
         val t : float
 
-        new(x : NativeArray<float32>, y : NativeArray<float32>) = { X=x; Y=y; t=0.0 }
+        new(x : NativeArray<float32>, y : NativeArray<float32>, z : NativeArray<float32>) = { X=x; Y=y; Z=z; t=0.0 }
     end
-
-    member public this.TestFunctionPublic = 
-        Debug.Log("Hello this is test public!");
-
-    member private this.TestFunctionPrivate = 
-        Debug.Log("Hello this is test private!");
 
     interface IJob with
         member this.Execute () =
-            this.X.[0] <- this.X.[0] + this.Y.[0]
+            for i in 0 .. this.X.Length-1 do // Hah, for-in-do range is inclusive
+                this.Z.[i] <- this.X.[i] + this.Y.[i]
     
