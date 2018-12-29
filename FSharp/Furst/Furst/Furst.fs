@@ -13,7 +13,7 @@ open Unity.Mathematics;
 
 
 // This is basically the typedef I was looking for in C#
-type Q15_16 =
+type FixedQ15_16 =
     | Q15_16 of int32
 
     //static let Scale = 16 How? Is this because of single-choice type?
@@ -24,13 +24,7 @@ type Q15_16 =
     static member Create(n:float32) =
         Q15_16((int)(n * (float32)(1 <<< 16)))
 
-    //static member ToFloat(n:Q15_16) : float32 =
-        // How?
-
-    static member (+) (a:Q15_16, b:Q15_16) = a + b
-
-    //override x.ToString() =
-        // How?
+    static member (+) (Q15_16 a, Q15_16 b) = FixedQ15_16.Create(a + b);
 
 module MyMath =
     let add(x,y) = x+y
@@ -67,9 +61,9 @@ type FixedPointTest() =
 
     member this.TestFixedAdd () =
         // Todo: this function deadlocks the editor for some reason
-        let a = Q15_16.Create 2
-        let b = Q15_16.Create 3
-        let mutable c = Q15_16.Create 0
+        let a = FixedQ15_16.Create 2
+        let b = FixedQ15_16.Create 3
+        let mutable c = FixedQ15_16.Create 0
 
         let watch = System.Diagnostics.Stopwatch.StartNew()
         watch.Start()
